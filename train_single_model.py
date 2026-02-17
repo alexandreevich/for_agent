@@ -67,11 +67,13 @@ def main(model: str):
     task: Task = Task.init(
         project_name="uber", reuse_last_task_id=False, output_uri=True
     )
-    ### ---- "Подсказывание нужных аргументов ---- ###
+
+    ### ---- "Подсказывание" нужных аргументов ---- ###
     task.update_parameters({"Args/model": model})
 
-    ### ---- Отправка задачи в очередь ---- ###
-    task.execute_remotely(queue_name="default")
+    ### ---- Отправка задачи в очередь ---- ### 
+    task.execute_remotely(queue_name="ya_queue")
+
     logger: Logger = task.get_logger()
     logger.report_text(f"Train {model} model")
 
